@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const getAllUsers = asyncHandler(async (req,res) => {
   const users = await User.find().select('-password').lean();
   if(!users?.length) return res.status(400).json({ message: "No users found" });
-  res.json(users)
+  res.json(users);
 })
 
 //@desc Create new User
@@ -65,7 +65,7 @@ const updateUser = asyncHandler(async (req,res) => {
   user.active = active;
   if(password) (user.password = await bcrypt.hash(password, 10));
   const updatedUser = await user.save();
-  res.json({ message: `${updatedUser.username} updated` })
+  res.json({ message: `${updatedUser.username} updated` });
 })
 
 //@desc Delete a user
